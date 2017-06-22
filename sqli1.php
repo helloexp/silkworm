@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 $id = isset($_GET['id']) ? $_GET['id'] : 1;
 $sql = "SELECT * FROM user WHERE id={$id}";
-echo $sql;
+echo $sql."<br>";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -26,18 +26,6 @@ if ($result->num_rows > 0) {
     echo "0 结果";
 }
 
-$sql2 = "select * from user where id2='{$id}'";
-echo $sql2;
-$result2 = $conn->query($sql);
-
-if ($result2->num_rows > 0) {
-    // 输出数据
-    while($row = $result2->fetch_assoc()) {
-        echo "id: " . $row["id"]. "<br>用户名: " . $row["username"]. " " . "<br>";
-    }
-} else {
-    echo "0 结果";
-}
 
 $conn->close();
 
