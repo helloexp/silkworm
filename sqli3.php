@@ -12,8 +12,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("连接失败: " . $conn->connect_error);
 }
-$id = isset($_GET['id']) ? urldecode($_GET['id']) : 1;
-
+$id = isset($_GET['id']) ? $_GET['id'] : 1;
+$id = str_replace("'", '', $id);
 echo "你输入id值为：".$id."<br>";
 $sql = "select * from user where id='{$id}'";
 echo $sql."<br>";
