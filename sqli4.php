@@ -13,10 +13,10 @@ if ($conn->connect_error) {
     die("连接失败: " . $conn->connect_error);
 }
 $id = isset($_GET['id']) ? $_GET['id'] : 1;
-$id = str_replace("'", '', $id);
+$id = stripslashes($id);
+
 echo "你输入id值为：".$id."<br>";
-$title = isset($_GET['title']) ? $_GET['title'] : 'news title';
-$sql = "select * from user where id='{$id}' and title='{$title}'";
+$sql = "select * from user where id='{$id}'";
 echo $sql."<br>";
 $result = $conn->query($sql);
 
