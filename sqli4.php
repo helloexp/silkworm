@@ -9,7 +9,7 @@ header("Content-type: text/html; charset=utf-8");
 require_once ("common.php");
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 $dbname = "pte";
 
 // 创建连接
