@@ -1,4 +1,10 @@
 <?php
+/**
+ * int型注入，加入URL编码技巧
+ * User: Administrator
+ * Date: 2017/7/1
+ * Time: 7:19
+ */
 header("Content-type: text/html; charset=utf-8");
 require_once ("common.php");
 $servername = "localhost";
@@ -17,7 +23,7 @@ $id = stripslashes($id);
 
 echo "你输入id值为：".$id."<br>";
 $sql = "select * from user where id='{$id}'";
-echo $sql."<br>";
+echo "当前SQL语句：".$sql."<br>";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

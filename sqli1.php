@@ -1,6 +1,8 @@
 <?php
+/**
+ * 入门，int型注入、没有任何防御
+ */
 header("Content-type: text/html; charset=utf-8");
-require_once ("common.php");
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -14,13 +16,13 @@ if ($conn->connect_error) {
 }
 $id = isset($_GET['id']) ? $_GET['id'] : 1;
 $sql = "SELECT * FROM user WHERE id={$id}";
-echo $sql."<br>";
+echo "当前SQL语句：".$sql."<br>";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // 输出数据
     while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["id"]. "<br>用户名: " . $row["username"]. " " . "<br>";
+        echo "<br>查询结果：id: " . $row["id"]. " 用户名: " . $row["username"]. " " . "<br>";
     }
 } else {
     echo "0 结果";
