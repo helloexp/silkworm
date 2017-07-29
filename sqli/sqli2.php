@@ -1,12 +1,12 @@
 <?php
 /**
- * 宽字节注入，数据库版本大于4.1并小于5才可以；
+ * int型注入，加入特殊字符转义，利用urldecode解码漏洞，单引号%2527，#号%23
  * User: Administrator
  * Date: 2017/7/1
  * Time: 7:19
  */
 header("Content-type: text/html; charset=utf-8");
-require_once ("common.php");
+require_once("common.php");
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -14,8 +14,11 @@ $dbname = "pte";
 
 // 创建连接
 $conn = new mysqli($servername, $username, $password, $dbname);
-mysqli_query("set names 'gbk", $conn);
-$id = isset($_GET['id']) ? $_GET['id'] : 1;
+// Check connection
+if ($conn->connect_error) {
+    die("连接失败: " . $conn->connect_error);
+}
+$id = isset($_GET['id']) ? urldecode($_GET['id']) : 1;
 
 echo "你输入id值为：".$id."<br>";
 $sql = "select * from user where id='{$id}'";
@@ -32,3 +35,6 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
+?>
+
+
